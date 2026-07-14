@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-canvas: 247 248 250;
+    --color-ink: 30 30 45;
+    --color-surface: 255 255 255;
+    --color-border: 229 231 235;
+    --color-sidebar: 26 29 46;
+    --color-sidebar-hover: 37 40 64;
+    --color-sidebar-active: 47 51 82;
+    --color-sidebar-text: 160 163 189;
+  }
+
+  .dark {
+    --color-canvas: 15 15 20;
+    --color-ink: 247 248 250;
+    --color-surface: 25 25 35;
+    --color-border: 45 45 60;
+    --color-sidebar: 20 22 35;
+    --color-sidebar-hover: 30 33 50;
+    --color-sidebar-active: 40 44 65;
+    --color-sidebar-text: 160 163 189;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-canvas text-ink font-body antialiased transition-colors duration-200;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid #6C63FF;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  ::selection {
+    background: rgba(108, 99, 255, 0.15);
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+@layer components {
+  /* Skeleton loading shimmer */
+  .skeleton {
+    @apply rounded-xl2 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  /* Custom toggle switch */
+  .toggle-switch {
+    @apply relative inline-flex h-6 w-11 cursor-pointer items-center rounded-full transition-colors duration-200;
+    background: #D1D5DB;
+  }
+  .toggle-switch.active {
+    @apply bg-primary;
+  }
+  .toggle-switch::after {
+    content: '';
+    @apply absolute left-0.5 h-5 w-5 rounded-full bg-surface shadow-sm transition-transform duration-200;
+  }
+  .toggle-switch.active::after {
+    transform: translateX(20px);
+  }
+
+  /* Section label for sidebars */
+  .sidebar-section-label {
+    @apply px-4 pb-1.5 pt-5 text-[11px] font-bold uppercase tracking-[0.12em] text-white/30;
+  }
+
+  /* Page enter animation */
+  .page-enter {
+    animation: fadeUp 0.35s ease-out;
+  }
+
+  /* Stat card left border accent */
+  .stat-accent-primary { border-left: 3px solid #6C63FF; }
+  .stat-accent-gold { border-left: 3px solid #F5A623; }
+  .stat-accent-success { border-left: 3px solid #22C55E; }
+  .stat-accent-ink { border-left: 3px solid #1E1E2D; }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-surface/70 backdrop-blur-xl;
+  }
+  .glass-dark {
+    @apply bg-sidebar/95 backdrop-blur-xl;
+  }
+
+  /* Notification badge */
+  .badge-dot {
+    @apply absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Text balance for headings */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
